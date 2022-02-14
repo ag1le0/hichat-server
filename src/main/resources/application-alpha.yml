@@ -1,0 +1,113 @@
+# port
+server:
+  http.port: 8989
+  port: 18989
+  domain: https://fiisw.foxconn.com.vn:6443/peachat/home
+  servlet:
+    context-path: /peachat
+    session:
+      cookie:
+        name: PEACHATSESSION
+      timeout: 21600
+  ssl:
+    key-store: D:\tiennd\app\apache24\conf\ssl\8170.pfx
+    key-store-password: Foxconn168!!
+    key-store-type: PKCS12
+    enabled: true
+
+# peachat
+peachat:
+  firebase:
+    configuration-file: searchshare-firebase-adminsdk-bfnsh-b3e65e1b76.json
+
+#security
+#security:
+#  basic:
+#    enabled: false
+#  oauth2:
+#    client:
+#      clientId: ws-system
+#      clientSecret: Foxconn168!!
+#      accessTokenUri: http://10.224.81.70:8888/oauth-service/oauth/token
+#      userAuthorizationUri: http://10.224.81.70:8888/oauth-service/oauth/authorize
+#      clientAuthenticationScheme: header
+#    resource:
+#      userInfoUri: http://10.224.81.70:8888/oauth-service/api/user/information
+#      userChangePassUri: http://10.224.81.70:8888/oauth-service/api/user/change-password
+#      tokenInfoUri: http://10.224.81.70:8888/oauth-service/oauth/check_token
+##    logoutUrl: http://10.224.81.70:8888/oauth-service/logout?redirectUrl=http://10.224.81.70:8888
+#    logoutUrl: http://10.224.81.70:8888/oauth-service/logout
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      clientId: ws-system
+      clientSecret: Foxconn168!!
+      accessTokenUri: https://127.0.0.1:18686/oauth-service/oauth/token
+      userAuthorizationUri: https://127.0.0.1:18686/oauth-service/oauth/authorize
+      clientAuthenticationScheme: header
+    resource:
+      userInfoUri: https://127.0.0.1:18686/oauth-service/api/user/information
+      userChangePassUri: https://127.0.0.1:18686/oauth-service/api/user/change-password
+      tokenInfoUri: https://127.0.0.1:18686/oauth-service/oauth/check_token
+    logoutUrl: https://127.0.0.1:18686/oauth-service/logout
+
+# db
+spring:
+  datasource:
+#    url: jdbc:sqlserver://10.224.81.70:3000;databaseName=peachat
+#    username: 8170sql
+#    password: Foxconn123
+    url: jdbc:sqlserver://10.224.81.145:3000;databaseName=peachat
+    username: fii
+    password: Foxconn168!!
+#    hibernate.dialect: org.hibernate.dialect.SQLServer2008Dialect
+    configuration:
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+#      minimumIdle: 3
+#      maximumPoolSize: 5
+#    hikari:
+#      maximumPoolSize: 50
+#      minimumIdle: 25
+  jpa:
+    show-sql: true
+#    properties.hibernate.format_sql: true
+    properties.hibernate.use_nationalized_character_data: true
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  jmx:
+    default-domain: peachat
+  jackson:
+    time-zone: Asia/Ho_Chi_Minh
+    date-format: yyyy/MM/dd HH:mm:ss
+  rabbitmq:
+    host: 10.224.81.142
+    port: 5672
+    username: rabbitmq
+    password: Foxconn168!!
+  servlet:
+    multipart:
+      location: D:/tiennd/data/project/peachat/tmp/
+      enabled: true
+      max-file-size: 16MB
+      max-request-size: 32MB
+
+# uploading
+path:
+  data: D:/tiennd/data/project/peachat/
+
+# logging
+logging:
+  path: logs/peachat
+  level:
+    com.foxconn.fii: DEBUG
+#    org.hibernate.SQL: DEBUG
+#    org.springframework.jdbc.core.JdbcTemplate: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
+#    org.springframework.security: DEBUG
+#    com.zaxxer.hikari: DEBUG

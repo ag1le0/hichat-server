@@ -1,0 +1,45 @@
+<html>
+
+<head>
+<>
+<script src="./stomp.js"></script>
+</head>
+
+<body>
+<div>
+<form>
+<div><a id="messages"></a></div>
+<div><span><input id="input_message" /></span><span><button onclick="send()">Send</button></span></div>
+</form>
+</div>
+</body>
+
+<script>
+var messages = "";
+
+function send() {
+	var msg = document.getElementById('input_message');
+	client.send('pea.v0946495', null, msg.value);
+}
+
+function receive(msg) {
+	console.log(msg);
+	messages += "\n" + msg;
+}
+
+var ws = new WebSocket('ws://10.224.81.142:15674/ws');
+var client = Stomp.over(ws);
+
+var on_connect = function() {
+    console.log('connected');
+	client.subscribe('pea.v0946495', receive, null);
+	client.send('pea.v0946495', null, 'hello');
+};
+var on_error =  function() {
+    console.log('error');
+};
+client.connect('rabbitmq', 'Foxconn168!!', on_connect, on_error, '/');
+
+</script>
+
+</html>

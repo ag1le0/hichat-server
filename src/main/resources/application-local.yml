@@ -1,0 +1,80 @@
+# port
+server:
+  http.port: 8988
+  port: 18988
+  domain: http://localhost:8988/hichat/home
+  servlet:
+    context-path: /hichat
+    session:
+      cookie:
+        name: PEACHATSESSION
+      timeout: 300
+
+peachat:
+  firebase:
+    configuration-file: searchshare-firebase-adminsdk-bfnsh-b3e65e1b76.json
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      clientId: ws-system
+      clientSecret: Foxconn168!!
+      accessTokenUri: http://localhost:8686/oauth-service/oauth/token
+      userAuthorizationUri: http://localhost:8686/oauth-service/oauth/authorize
+      clientAuthenticationScheme: header
+    resource:
+      userInfoUri: http://localhost:8686/oauth-service/api/user/information
+      userChangePassUri: http://localhost:8686/oauth-service/api/user/change-password
+      tokenInfoUri: http://localhost:8686/oauth-service/oauth/check_token
+    logoutUrl: http://localhost:8686/oauth-service/logout
+# db
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=peachat
+    username: sa
+    password: Foxconn168!!
+    hibernate.dialect: org.hibernate.dialect.SQLServer2008Dialect
+    configuration:
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+  jpa:
+    show-sql: true
+    properties.hibernate.use_nationalized_character_data: true
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  jmx:
+    default-domain: peachat
+  jackson:
+    time-zone: Asia/Ho_Chi_Minh
+    date-format: yyyy/MM/dd HH:mm:ss
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: sa
+    password: Foxconn168!!
+    spring:
+      rabbitmq:
+        virtual-host: /
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 16MB
+      max-request-size: 32MB
+
+# uploading
+path:
+  data: /Users/magic/Final/data/hichat/
+
+# logging
+logging:
+  path: logs/hichat
+  level:
+    com.foxconn.fii: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
+    org.springframework.security: DEBUG
